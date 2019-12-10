@@ -1,0 +1,26 @@
+<!-- Date:    12/04/2019
+Programmer:   Thelma Nora
+Class:        CIST 2472 (Intro to Python)
+Description:  This is a note taking program that enables users to save personal notes with a user login protected app.
+Saved as:     MyProject/PostIt/template/home.html ( this is the default page a visitor sees when they access the website)
+-->
+{% extends 'PostIt/base.html' %}  <!-- this extends every template and style from the base.html page to this page-->
+{% block title %}Home{% endblock %}
+{% block content %}
+    <div class="jumbotron" style="background-image: url(/PostIt/static/note_writing.jpg); height: 600px; width: 500px">
+        <h2 style="color: brown"> MyNotes App</h2>
+            <h3>
+                This is a simple note-taking application that allows you to add a note and enter multiple tasks into
+                one notepad.
+            </h3>
+            <h4>Current functions include;</h4>
+            <ul style="font-size: larger">
+                <li>Create a user profile</li>
+                <li>Log in as a user to add or view notes/task</li>
+                <li>Create a Note</li>
+                <li>Add tasks to the note</li>
+                <li>View notes and tasks</li>
+
+            </ul>
+    </div>
+{% endblock %}

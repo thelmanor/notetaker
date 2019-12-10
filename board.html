@@ -1,0 +1,44 @@
+<!-- Date:    12/04/2019
+Programmer:   Thelma Nora
+Class:        CIST 2472 (Intro to Python)
+Description:  This is a note taking program that enables users to save personal notes with a user login protected app.
+Saved as:     MyProject/PostIt/template/board.html( this the page where the user can edit the tasks within a note)
+-->
+{% extends "PostIt/base.html" %}  <!-- this extends every template and style from the base.html page to this page-->
+{% block title %}Tasks{% endblock %}
+{% block content %}
+	<h1>{{note_id.name}}</h1>
+	<form method="post" action="#">
+		{% csrf_token %} <!--protects forms against cross site request forgeries-->
+    <div class="note-wrap">
+		{% for task in note_id.task_set.all %}  <!--python code to accept the task variables -->
+			<div class="input-group-prepend">
+				<div class="input-group-text">
+					{% if task.complete == True %} <!--python if statement to accept the task_completed instruction -->
+                        <label>
+                            <input type="checkbox" value="clicked" name="c{{task.id}}" checked>
+                        </label>
+                    {% else %}
+                        <label>
+                            <input type="checkbox" value="clicked" name="c{{task.id}}">
+                        </label>
+                    {% endif %}
+				</div>
+			</div>
+            <label>
+                <input type="text" value="{{task.text}}" class="form-control">
+            </label>
+		{% endfor %}
+       </div>
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<button type="submit" name="newTask" value="newTask" class="btn btn-danger">Add Task</button>
+			</div>
+            <label>
+                <input type="text" name="new">
+            </label>
+    </div>
+
+    <button type="submit" name="save" value="save" class="btn btn-danger">Save</button>
+	</form>
+{% endblock %}

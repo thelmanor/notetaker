@@ -1,0 +1,29 @@
+<!-- Date:    12/04/2019
+Programmer:   Thelma Nora
+Class:        CIST 2472 (Intro to Python)
+Description:  This is a note taking program that enables users to save personal notes with a user login protected app.
+Saved as:     MyProject/PostIt/template/view.html (this page allows user to view the existing notes
+-->
+{% extends "PostIt/base.html" %}  <!-- this extends every template and style from the base.html page to this page-->
+{% block title %}View{% endblock %}
+{% block content %}
+
+    {% if user.is_authenticated %} <!--python code to authenticate user before allowing them to view notes added-->
+
+        {% for td in user.note.all %}<!--python code to loop through all the notes user has added and isplay notes-->
+            <div  class="note-wrap">
+                <p><a href="/{{td.id}}">{{td.name}}</a></p>
+            </div>
+        {% endfor %}
+
+    {% else %}
+    <div  class="jumbotron" style="background-image: url(/PostIt/static/note_writing.jpg); height: 600px; width: 500px">
+         <h2 style="color: brown"> MyNotes App</h2>
+            <h3>
+                <img src="/PostIt/static/locked.jpg" class="mx-auto d-block" width="200" height="200">
+                Please make sure you are logged in and then add a note to view your notes <!-- message that shows when user is not logged in-->
+            </h3>
+    </div>
+    {% endif %}
+
+{% endblock %}

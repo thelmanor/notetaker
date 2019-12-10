@@ -1,0 +1,33 @@
+<!-- Date:    12/04/2019
+Programmer:   Thelma Nora
+Class:        CIST 2472 (Intro to Python)
+Description:  This is a note taking program that enables users to save personal notes with a user login protected app.
+Saved as:     MyProject/PostIt/template/create.html (this page allows user to create a new note)
+-->
+{% extends 'PostIt/base.html' %}  <!-- this extends every template and style from the base.html page to this page-->
+{% block title %} Create New List {% endblock %}
+{% block content %}
+    <div class="jumbotron" style="background-image: url(/PostIt/static/note_writing.jpg); height: 600px; width: 500px" >
+        {% if user.is_authenticated %} <!--python code to authenticate user before allowing user to create a note-->
+        <h3>Create New Note</h3>
+            <form method="post" action="/create/" class="form-group"> <!--calling the notes form request-->
+                {% csrf_token %}<!--protects forms against cross site request forgeries-->
+                <div class="input-group mb-3">
+                    <div class="input-group-append">
+                        <button type="submit" name="save" class="btn btn-danger">Add Note</button>
+                    </div>{{form.name}} <!--note object -->
+                </div>
+            </form>
+
+        {% else %}
+
+        <div>
+            <h3>MyNotes App</h3>
+            <img src="/PostIt/static/locked.jpg" class="mx-auto d-block" width="200" height="200">
+            <h4>You are not currently logged in as a user.<a href="{% url 'login' %}">Login</a> or
+                <a href="{% url 'register' %}">Register</a>to create a new note</h4>
+        </div>
+
+        {% endif %}
+    </div>
+{% endblock %}

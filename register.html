@@ -1,0 +1,21 @@
+<!-- Date:    12/04/2019
+Programmer:   Thelma Nora
+Class:        CIST 2472 (Intro to Python)
+Description:  This is a note taking program that enables users to save personal notes with a user login protected app.
+Saved as:     MyProject/PostIt/template/register.html ( This page is for the new user to register a new account)
+-->
+
+{% extends "PostIt/base.html" %}  <!-- this extends every template and style from the base.html page to this page-->
+{% block title %}Register a New Account{% endblock %}
+{% load crispy_forms_tags %} <!--using crispy forms to create the registration page forms-->
+{% block content %}
+    <div class="jumbotron" style="background-image: url(/PostIt/static/note_writing.jpg); height: 600px; width: 500px">
+        <form method="POST" class="form-group">
+            {% csrf_token %} <!--protects forms against cross site request forgeries-->
+            {{ form|crispy }} <!--crispy form marker-->
+            <button type="submit" class="btn btn-danger">
+                Register
+            </button>
+        </form>
+    </div>
+{% endblock %}
